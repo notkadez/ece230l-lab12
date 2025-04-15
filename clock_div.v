@@ -1,7 +1,7 @@
 module clock_div #(parameter DIVIDE_BY = 17) (clock, reset, div_clock);
     input clock;
     input reset;
-    output div_clock;
+    output reg div_clock;
 
     // 100 MHz input clock, divide down by chaining N FlipFlops together
     // to slow down the clock by 1/2^N
@@ -9,7 +9,12 @@ module clock_div #(parameter DIVIDE_BY = 17) (clock, reset, div_clock);
     wire [DIVIDE_BY:0] q;
     wire [DIVIDE_BY-1:0] notq;
 
+    always @(*) begin
+        div_clock <= q[DIVIDE_BY];
+    end
+
     assign q[0] = clock;
+    // assign div_clock = q[DIVIDE_BY];
 
     genvar i;
     generate
@@ -24,7 +29,5 @@ module clock_div #(parameter DIVIDE_BY = 17) (clock, reset, div_clock);
             );
         end
     endgenerate
-
-    assign div_clock = q[DIVIDE_BY];
 
 endmodule

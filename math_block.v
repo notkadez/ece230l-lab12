@@ -4,17 +4,12 @@ module math_block(A, B, AplusB, AminusB);
     output [3:0] AplusB;
     output [3:0] AminusB;
 
-
     wire [3:0] B_not;
-    wire [3:0] sum_add;
-    wire [3:0] sum_sub;
+
     wire c1, c2, c3, c4, c5, c6;
 
     // Invert B for subtraction
-    assign B_not[0] = ~B[0];
-    assign B_not[1] = ~B[1];
-    assign B_not[2] = ~B[2];
-    assign B_not[3] = ~B[3];
+    assign B_not = ~B;
 
     // Addition: A + B
     full_adder add0(.a(A[0]), .b(B[0]),     .cin(1'b0), .sum(AplusB[0]), .cout(c1));

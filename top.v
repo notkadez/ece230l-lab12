@@ -6,10 +6,14 @@ module top(A, B, segs, anode, clock, reset);
     output [6:0] segs;
     output [3:0] anode;
 
+    reg [3:0] segs_reg;
+
     wire [3:0] AplusB;
     wire [3:0] AminusB;
 
     wire div_clock;
+
+    assign segs = segs_reg;
 
     // Instantiate the clock divider
     clock_div #(17) div_clk (
@@ -33,7 +37,7 @@ module top(A, B, segs, anode, clock, reset);
         .AplusB(AplusB),
         .AminusB(AminusB),
         .anode(anode),
-        .segs(segs)
+        .segs(segs_reg)
     );
 
     // Instantiate the 7-segment scanner

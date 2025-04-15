@@ -1,4 +1,4 @@
-module top(sw, clk, btnC, an, seg);
+module top #(parameter DIVIDE_BY = 17) (sw, clk, btnC, an, seg);
     input [7:0] sw; // A and B
     input clk; // 100 MHz board clock
     input btnC; // Reset
@@ -12,16 +12,14 @@ module top(sw, clk, btnC, an, seg);
     wire reset;
     wire div_clock;
 
-
     wire [3:0] AplusB;
     wire [3:0] AminusB;
-
 
     reg [6:0] segs_reg;
     assign seg = segs_reg;
 
     // Instantiate the clock divider
-    clock_div #(2) div_clk (
+    clock_div #(DIVIDE_BY) div_clk (
         .clock(clk),
         .reset(reset),
         .div_clock(div_clock)

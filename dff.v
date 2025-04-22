@@ -3,7 +3,7 @@ module dff(
     input rst,
     input D,
     input Default,
-    output reg Q,
+    output reg Q
 );
     initial begin
         Q = Default;

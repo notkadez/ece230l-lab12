@@ -1,4 +1,4 @@
-module top #(parameter DIVIDE_BY = 12) (
+module top #(parameter DIVIDE_BY = 16) (
     input [7:0] sw,
     input clk,
     input btnC,

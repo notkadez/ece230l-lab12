@@ -2,12 +2,11 @@ module tff (
     input clk,
     input reset,
     input T,
-    input Default,
     output reg Q
 );
-    always @(posedge clk or posedge reset) begin
+    always @(posedge clk, posedge reset) begin
         if (reset)
-            Q <= Default;
+            Q <= 'b0;
         else if (T)
             Q <= ~Q;
     end

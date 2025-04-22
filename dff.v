@@ -1,22 +1,19 @@
-module dff(reset, clock, D, Default, Q, NotQ);
-    input reset;
-    input clock;
-    input D;
-    input Default;
-    output reg Q;
-    output NotQ;
-
+module dff(
+    input clk, 
+    input rst,
+    input D,
+    input Default,
+    output reg Q,
+);
     initial begin
         Q = Default;
     end
 
-    assign NotQ = ~Q;
-
-    always @(posedge reset, posedge clock) begin
-        if (reset) begin
-            Q <= 0;
-        end else if (clock) begin
+    always @(posedge clk, posedge rst) begin
+        if (rst)
+            Q <= Default;
+        else
             Q <= D;
-        end
     end
+
 endmodule

@@ -1,22 +1,21 @@
-module top #(parameter DIVIDE_BY = 17) (sw, clk, btnC, an, seg);
-    input [7:0] sw; // A and B
-    input clk; // 100 MHz board clock
-    input btnC; // Reset
-    output [3:0] an; // 7seg anodes
-    output [6:0] seg; // 7seg segments
-
+module top #(parameter DIVIDE_BY = 12) (
+    input [7:0] sw,
+    input clk,
+    input btnC,
+    output [3:0] an,
+    output [6:0] seg
+);
     wire [3:0] A, B;
     assign A = sw[3:0];
     assign B = sw[7:4];
 
     wire reset;
+    assign reset = btnC;
+
     wire div_clock;
 
     wire [3:0] AplusB;
     wire [3:0] AminusB;
-
-    reg [6:0] segs_reg;
-    assign seg = segs_reg;
 
     // Instantiate the clock divider
     clock_div #(DIVIDE_BY) div_clk (
@@ -40,7 +39,7 @@ module top #(parameter DIVIDE_BY = 17) (sw, clk, btnC, an, seg);
         .AplusB(AplusB),
         .AminusB(AminusB),
         .anode(an),
-        .segs(segs_reg)
+        .segs(seg)
     );
 
     // Instantiate the 7-segment scanner

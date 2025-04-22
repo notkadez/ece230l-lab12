@@ -1,10 +1,11 @@
-module seven_seg_decoder(A, B, AplusB, AminusB, anode, segs);
-    input [3:0] A;
-    input [3:0] B;
-    input [3:0] AplusB;
-    input [3:0] AminusB;
-    input [3:0] anode;
-    output reg [6:0] segs;
+module seven_seg_decoder(
+    input [3:0] A,
+    input [3:0] B,
+    input [3:0] AplusB,
+    input [3:0] AminusB,
+    input [3:0] anode,
+    output reg [6:0] segs
+);
 
     reg [3:0] selected_sig;
 
